@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>{% block title %}Shop{% endblock %} | Ecommy</title>
+<link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+<header class="nav">
+  <a class="brand" href="{{ url_for('home') }}">Ecommy</a>
+  <input type="checkbox" id="menu" hidden>
+  <label for="menu" class="burger" aria-label="Menu">&#9776;</label>
+  <form class="search" action="{{ url_for('search') }}" method="get">
+    <input type="search" name="search" placeholder="Search products" aria-label="Search products">
+    <button class="btn sm">Search</button>
+  </form>
+  <nav class="links">
+    <a href="{{ url_for('index') }}">Shop</a>
+    <a href="{{ url_for('contact') }}">Contact</a>
+    {% if session.get('user') %}
+      <a href="{{ url_for('viewcart') }}">Cart{% if cart_count %}<span class="count">{{ cart_count }}</span>{% endif %}</a>
+      <a href="{{ url_for('orders') }}">My orders</a>
+      <a href="{{ url_for('userlogout') }}">Log out</a>
+    {% elif session.get('admin') %}
+      <a href="{{ url_for('adminpanel') }}">Admin panel</a>
+      <a href="{{ url_for('adminlogout') }}">Log out</a>
+    {% else %}
+      <a href="{{ url_for('userlogin') }}">Log in</a>
+      <a href="{{ url_for('usersignup') }}">Sign up</a>
+      <a href="{{ url_for('adminlogin') }}">Sell on Ecommy</a>
+    {% endif %}
+  </nav>
+</header>
+<nav class="cats" aria-label="Categories">
+  {% for c in categories %}<a class="pill" data-cat="{{ c }}" href="{{ url_for('category', type=c) }}">{{ c|replace('_',' ') }}</a>{% endfor %}
+</nav>
+<main class="wrap">
+  {% for m in get_flashed_messages() %}<div class="flash" role="status">{{ m }}</div>{% endfor %}
+  {% block content %}{% endblock %}
+</main>
+<footer class="footer">Ecommy, shop electronics, fashion, home appliances and groceries.</footer>
+</body>
+</html>

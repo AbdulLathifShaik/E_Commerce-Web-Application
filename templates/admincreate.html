@@ -1,0 +1,14 @@
+{% extends "base.html" %}
+{% block title %}Seller sign up{% endblock %}
+{% block content %}
+<form method="post" class="form">
+  <h2>Become a seller</h2>
+  <label class="f" for="username">Name</label><input id="username" name="username" required>
+  <label class="f" for="email">Email</label><input id="email" type="email" name="email" required>
+  <label class="f" for="address">Address</label><textarea id="address" name="address" rows="3" required></textarea>
+  <label class="f" for="password">Password</label><input id="password" type="password" name="password" minlength="6" required>
+  <label class="f"><input type="checkbox" name="agree" value="on" required> I agree to the seller terms</label>
+  <button class="btn block">Send verification code</button>
+  <p class="muted center">Already a seller? <a href="{{ url_for('adminlogin') }}">Log in</a></p>
+</form>
+{% endblock %}

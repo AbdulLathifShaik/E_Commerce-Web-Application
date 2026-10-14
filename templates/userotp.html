@@ -1,0 +1,10 @@
+{% extends "base.html" %}
+{% block title %}Verify email{% endblock %}
+{% block content %}
+<form method="post" class="form">
+  <h2>Check your email</h2>
+  <p class="muted">Enter the 6 character code we sent you. It is case sensitive.</p>
+  <label class="f" for="otp">Verification code</label><input id="otp" name="otp" maxlength="6" autocomplete="one-time-code" required>
+  <button class="btn block">Verify and create account</button>
+</form>
+{% endblock %}

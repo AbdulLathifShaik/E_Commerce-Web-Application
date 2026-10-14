@@ -1,0 +1,13 @@
+{% extends "base.html" %}
+{% block title %}Admin panel{% endblock %}
+{% block content %}
+<div class="row">
+  {% if me.dp_image %}<img class="avatar" src="{{ url_for('static', filename='uploads/' ~ me.dp_image) }}" alt="">{% endif %}
+  <div><h1>Hello, {{ me.username }}</h1><p class="muted">You have {{ count }} product{{ '' if count == 1 else 's' }} listed.</p></div>
+</div>
+<div class="tiles">
+  <a class="tile" href="{{ url_for('additem') }}">Add a product<span>List something new</span></a>
+  <a class="tile" href="{{ url_for('viewallitems') }}">My products<span>View, edit or delete</span></a>
+  <a class="tile" href="{{ url_for('adminprofileupdate') }}">My profile<span>Name, address and photo</span></a>
+</div>
+{% endblock %}

@@ -1,0 +1,21 @@
+{% extends "base.html" %}
+{% block title %}Your cart{% endblock %}
+{% block content %}
+<h1>Your cart</h1>
+{% if cart %}
+<div class="scroll"><table class="tbl">
+  <tr><th></th><th>Product</th><th>Price</th><th>Qty</th><th>Subtotal</th><th></th></tr>
+  {% for id, c in cart.items() %}
+  <tr>
+    <td><img src="{{ url_for('static', filename='uploads/' ~ c.image) }}" alt=""></td>
+    <td><a href="{{ url_for('description', itemid=id) }}">{{ c.name }}</a></td>
+    <td>&#8377;{{ '%.2f'|format(c.price) }}</td><td>{{ c.qty }}</td><td>&#8377;{{ '%.2f'|format(c.price * c.qty) }}</td>
+    <td><a class="btn ghost sm" href="{{ url_for('removecart_item', itemid=id) }}">Remove</a></td>
+  </tr>{% endfor %}
+</table></div>
+<div class="total">Total: &#8377;{{ '%.2f'|format(total) }}</div>
+<form method="post" action="{{ url_for('checkout') }}" class="row" style="justify-content:flex-end">
+  <a class="btn ghost" href="{{ url_for('index') }}">Keep shopping</a><button class="btn">Place order</button>
+</form>
+{% else %}<p class="muted">Your cart is empty. <a href="{{ url_for('index') }}">Find something you like.</a></p>{% endif %}
+{% endblock %}

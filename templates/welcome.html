@@ -1,0 +1,15 @@
+{% extends "base.html" %}
+{% block title %}Welcome{% endblock %}
+{% block content %}
+{% set icons = {'Home_appliances': '🏠', 'Electronics': '🎧', 'Fashion': '👗', 'Grocery': '🛒'} %}
+<section class="hero">
+  <h1>Shop what you need, from sellers you can reach.</h1>
+  <p class="muted">Browse electronics, fashion, home appliances and groceries, then check out in a few taps.</p>
+  <div class="row"><a class="btn" href="{{ url_for('index') }}">Browse products</a><a class="btn ghost" href="{{ url_for('usersignup') }}">Create an account</a></div>
+</section>
+<h2>Shop by category</h2>
+<div class="cat-tiles">
+  {% for c in categories %}<a class="cat-tile" data-cat="{{ c }}" href="{{ url_for('category', type=c) }}"><span class="ico">{{ icons.get(c, '🛍️') }}</span>{{ c|replace('_',' ') }}</a>{% endfor %}
+</div>
+{% if items %}<h2>Picked for you</h2><div class="grid">{% for i in items %}{% include '_item_card.html' %}{% endfor %}</div>{% endif %}
+{% endblock %}

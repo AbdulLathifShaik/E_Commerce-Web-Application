@@ -1,0 +1,12 @@
+{% extends "base.html" %}
+{% block title %}Write a review{% endblock %}
+{% block content %}
+<form method="post" class="form">
+  <h2>Review {{ item.item_name }}</h2>
+  <label class="f" for="rate">Rating</label>
+  <select id="rate" name="rate"><option value="5">5 stars</option><option value="4">4 stars</option><option value="3">3 stars</option><option value="2">2 stars</option><option value="1">1 star</option></select>
+  <label class="f" for="title">Headline</label><input id="title" name="title" maxlength="100" required>
+  <label class="f" for="review">Your review</label><textarea id="review" name="review" rows="5" required></textarea>
+  <button class="btn block">Post review</button>
+</form>
+{% endblock %}

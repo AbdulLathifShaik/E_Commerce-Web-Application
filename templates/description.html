@@ -1,0 +1,26 @@
+{% extends "base.html" %}
+{% block title %}{{ item.item_name }}{% endblock %}
+{% block content %}
+<div class="detail">
+  <img src="{{ url_for('static', filename='uploads/' ~ item.image_name) }}" alt="{{ item.item_name }}">
+  <div>
+    <span class="badge" data-cat="{{ item.category }}">{{ item.category|replace('_',' ') }}</span>
+    <h1>{{ item.item_name }}</h1>
+    {% if avg %}{% set s = avg|round|int %}<div><span class="stars">{{ '★' * s }}{{ '☆' * (5 - s) }}</span> <span class="muted">{{ avg }} from {{ reviews|length }} review{{ '' if reviews|length == 1 else 's' }}</span></div>{% endif %}
+    <div class="price big">&#8377;{{ '%.2f'|format(item.price) }}</div>
+    <p class="desc">{{ item.description }}</p>
+    {% if item.quantity and item.quantity > 0 %}<p class="muted">{{ item.quantity }} in stock</p>{% endif %}
+    <div class="row">
+      {% if item.quantity and item.quantity > 0 %}<a class="btn" href="{{ url_for('addcart', itemid=item.id) }}">Add to cart</a>{% else %}<span class="muted">Out of stock</span>{% endif %}
+      <a class="btn ghost" href="{{ url_for('addreview', itemid=item.id) }}">Write a review</a>
+    </div>
+  </div>
+</div>
+<h2>Reviews</h2>
+{% for r in reviews %}
+<div class="review">
+  <div class="row"><strong>{{ r.username }}</strong><span class="stars">{{ '★' * r.rating }}{{ '☆' * (5 - r.rating) }}</span><span class="muted">{{ r.date.strftime('%d %b %Y') }}</span></div>
+  <h3>{{ r.title }}</h3><p class="desc">{{ r.review }}</p>
+</div>
+{% else %}<p class="muted">No reviews yet. Bought this? Be the first to review it.</p>{% endfor %}
+{% endblock %}

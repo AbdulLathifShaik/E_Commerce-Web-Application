@@ -1,0 +1,13 @@
+{% extends "base.html" %}
+{% block title %}My profile{% endblock %}
+{% block content %}
+<form method="post" enctype="multipart/form-data" class="form">
+  <h2>My profile</h2>
+  {% if me.dp_image %}<img class="avatar" src="{{ url_for('static', filename='uploads/' ~ me.dp_image) }}" alt="Your photo">{% endif %}
+  <label class="f" for="adminname">Name</label><input id="adminname" name="adminname" value="{{ me.username }}" required>
+  <label class="f" for="address">Address</label><textarea id="address" name="address" rows="3" required>{{ me.address }}</textarea>
+  <label class="f" for="phone">Phone number</label><input id="phone" name="phone" inputmode="numeric" value="{{ me.ph_no or '' }}">
+  <label class="f" for="file">Profile photo</label><input id="file" type="file" name="file" accept="image/*">
+  <button class="btn block">Save profile</button>
+</form>
+{% endblock %}

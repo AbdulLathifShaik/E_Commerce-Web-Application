@@ -1,0 +1,11 @@
+{% extends "base.html" %}
+{% block title %}My orders{% endblock %}
+{% block content %}
+<h1>My orders</h1>
+{% if orders %}
+<div class="scroll"><table class="tbl">
+  <tr><th>Order</th><th>Product</th><th>Qty</th><th>Total</th><th>Date</th></tr>
+  {% for o in orders %}<tr><td>#{{ o.orderid }}</td><td>{{ o.item_name }}</td><td>{{ o.qty }}</td><td>&#8377;{{ '%.2f'|format(o.total_price) }}</td><td>{{ o.ordered_at.strftime('%d %b %Y') }}</td></tr>{% endfor %}
+</table></div>
+{% else %}<p class="muted">No orders yet. <a href="{{ url_for('index') }}">Start shopping.</a></p>{% endif %}
+{% endblock %}

@@ -1,0 +1,15 @@
+{% extends "base.html" %}
+{% block title %}Sign up{% endblock %}
+{% block content %}
+<form method="post" class="form">
+  <h2>Create your account</h2>
+  <label class="f" for="username">Username</label><input id="username" name="username" maxlength="50" required>
+  <label class="f" for="email">Email</label><input id="email" type="email" name="email" required>
+  <label class="f" for="address">Delivery address</label><textarea id="address" name="address" rows="3" required></textarea>
+  <label class="f" for="gender">Gender</label>
+  <select id="gender" name="gender"><option value="">Prefer not to say</option><option>Male</option><option>Female</option></select>
+  <label class="f" for="password">Password</label><input id="password" type="password" name="password" minlength="6" required>
+  <button class="btn block">Send verification code</button>
+  <p class="muted center">Already have an account? <a href="{{ url_for('userlogin') }}">Log in</a></p>
+</form>
+{% endblock %}

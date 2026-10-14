@@ -1,0 +1,13 @@
+<article class="card" data-cat="{{ i.category }}">
+  <a href="{{ url_for('description', itemid=i.id) }}"><img src="{{ url_for('static', filename='uploads/' ~ i.image_name) }}" alt="{{ i.item_name }}" loading="lazy"></a>
+  <div class="body">
+    <span class="badge">{{ i.category|replace('_',' ') }}</span>
+    <h3>{{ i.item_name }}</h3>
+    <div class="price">&#8377;{{ '%.2f'|format(i.price) }}</div>
+    <div class="row" style="margin-top:auto">
+      <a class="btn ghost sm" href="{{ url_for('description', itemid=i.id) }}">Details</a>
+      {% if i.quantity and i.quantity > 0 %}<a class="btn sm" href="{{ url_for('addcart', itemid=i.id) }}">Add to cart</a>
+      {% else %}<span class="muted">Out of stock</span>{% endif %}
+    </div>
+  </div>
+</article>

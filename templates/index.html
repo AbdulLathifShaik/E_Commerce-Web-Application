@@ -1,0 +1,7 @@
+{% extends "base.html" %}
+{% block title %}{{ heading }}{% endblock %}
+{% block content %}
+<h1>{{ heading }}</h1>
+{% if items %}<div class="grid">{% for i in items %}{% include '_item_card.html' %}{% endfor %}</div>
+{% else %}<p class="muted">No products here yet. Try another category or search.</p>{% endif %}
+{% endblock %}

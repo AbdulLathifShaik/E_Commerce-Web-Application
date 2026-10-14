@@ -1,0 +1,10 @@
+{% extends "base.html" %}
+{% block title %}Forgot password{% endblock %}
+{% block content %}
+<form method="post" class="form">
+  <h2>Reset your password</h2>
+  <p class="muted">Enter your account email and we will send you a reset link.</p>
+  <label class="f" for="email">Email</label><input id="email" type="email" name="email" required>
+  <button class="btn block">Send reset link</button>
+</form>
+{% endblock %}
